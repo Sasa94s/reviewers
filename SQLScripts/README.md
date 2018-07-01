@@ -6,3 +6,8 @@
   - `Reviewer_Certifications` table
   - `Projects` table
   - `Submissions` table
+  - `SQLProc.sql`: This sql script contains `CREATE` statements of *stored procedures* for tables:
+  - `Code_Reviewe` table
+  - `Courses` table
+  - `Enrollments` table
+  - `Project_files` table
