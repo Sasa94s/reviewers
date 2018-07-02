@@ -1,5 +1,5 @@
 /*
-	Description: This script contains CREATE statements of views/functions/stored procedures
+	Description: This script contains CREATE statements of views/functions
 	@author: Mostafa Elsheikh (@Sasa94s)
 */
 
@@ -16,6 +16,7 @@ AS (
 	JOIN Projects AS p
 	ON p.id = rc.project_id
 )
+GO
 
 -- A function for retrieving certification details of a specific reviewer
 CREATE OR ALTER FUNCTION Get_Certifications_Of_Reviewer(@email varchar(150))
@@ -28,6 +29,7 @@ RETURN (
 	FROM Certification_Details cd
 	WHERE cd.reviewer = @email
 )
+GO
 
 -- A view of all reviews of each project in each month of each year
 CREATE OR ALTER VIEW Reviewer_Monthly_Earnings_Per_Project
@@ -41,6 +43,7 @@ AS (
 	GROUP BY 1, 2, 3, 4
 	ORDER BY 1 DESC, 2 DESC, 3 DESC, 4 DESC
 )
+GO
 
 -- Table-value Function: Returns Monthly earnings of a specific reviewer
 CREATE OR ALTER FUNCTION Monthly_Earnings(@email varchar(150))
@@ -54,6 +57,7 @@ RETURN (
 	FROM Reviewer_Monthly_Earnings_Per_Project AS rme
 	WHERE rme.[Reviewer Email] = @email
 )
+GO
 
 -- Scalar Function: Returns Reviewer earnings of specific year, month
 CREATE OR ALTER FUNCTION Total_Monthly_Earnings(@email varchar(150), @year int, @month int)
@@ -69,3 +73,4 @@ BEGIN
 		GROUP BY rme.[Year], rme.[Month]
 	)
 END
+GO
